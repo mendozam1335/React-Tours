@@ -18,7 +18,7 @@ const Tour = ({ image, info, name, price, btnHandler }) => {
           {readMore ? "Read More" : "Read Less"}
         </button>
       </div>
-      <button className="delete-btn btn" onClick={btnHandler}>
+      <button className="delete-btn btn btn-block" onClick={btnHandler}>
         Not Interested
       </button>
     </div>

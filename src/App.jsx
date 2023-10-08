@@ -8,23 +8,36 @@ const App = () => {
   const [tourList, setTourList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const getTours = async () => {
-      try {
-        const resp = await fetch(url);
-        if (!resp.ok) {
-          throw "Error 404";
-        }
-        const result = await resp.json();
-        console.log(result);
-        setTourList(result);
-      } catch (error) {
-        console.log(error);
+  const getTours = async () => {
+    setIsLoading(true);
+    try {
+      const resp = await fetch(url);
+      if (!resp.ok) {
+        throw "Error 404";
       }
-    };
+      const result = await resp.json();
+      setIsLoading(false);
+      setTourList(result);
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
     getTours();
-    return () => setIsLoading(false);
   }, []);
+
+  if (tourList.length === 0) {
+    return (
+      <main>
+        <h2 className="title">No More Tours</h2>
+        <button className="btn" onClick={getTours}>
+          Refresh
+        </button>
+      </main>
+    );
+  }
   return (
     <main>
       <h2 className="title">Our Tours</h2>

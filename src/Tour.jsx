@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 const Tour = ({ image, info, name, price, btnHandler }) => {
   const [readMore, setReadMore] = useState(true);
+
   const expandInfo = () => {
-    console.log("Exapanded Info");
     setReadMore(!readMore);
   };
   return (
